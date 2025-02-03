@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#introduccion-al-metodo-de-cuadratura-gaussiana" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -240,6 +245,18 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Explanation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -250,6 +267,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-al-metodo-de-cuadratura-gaussiana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción al método de cuadratura Gaussiana
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obteniendo-los-puntos-de-colocacion-y-pesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obteniendo los puntos de colocación y pesos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalado-de-puntos-de-muestreo-y-pesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escalado de puntos de muestreo y pesos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluacion-de-la-integral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluación de la integral
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -273,6 +343,50 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-al-metodo-de-cuadratura-gaussiana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción al método de cuadratura Gaussiana
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obteniendo-los-puntos-de-colocacion-y-pesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obteniendo los puntos de colocación y pesos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalado-de-puntos-de-muestreo-y-pesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escalado de puntos de muestreo y pesos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluacion-de-la-integral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluación de la integral
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -289,7 +403,51 @@
 
   <h1>Explanation</h1>
 
-<p>This part of the project documentation focuses on an <strong>understanding - oriented</strong> approach.</p>
+<p>Esta parte de la documentación del proyecto se enfoca en un alcance de <strong>orientación de comprensión</strong>.</p>
+<h2 id="introduccion-al-metodo-de-cuadratura-gaussiana"><strong>Introducción al método de cuadratura Gaussiana</strong></h2>
+<p>El método de <strong>cuadratura Gaussiana</strong> se utiliza para evaluación de integrales de forma numérica.</p>
+<p>El método está definido por la siguiente expresión:</p>
+<div class="arithmatex">\[\begin{align}
+\int_a^b {\rm{d}}x f(x) \approx \sum_{k=1}^{N+1} w_k f(x_k).
+\end{align}\]</div>
+<p>donde: <br>
+- <span class="arithmatex">\(w_k\)</span> son los "pesos". <br>
+- <span class="arithmatex">\(x_k\)</span> son los puntos de muestreo. Nótese que usamos <span class="arithmatex">\(N+1\)</span> puntos (es decir, <span class="arithmatex">\(N\)</span> subregiones o subintervalos).</p>
+<p>Los pesos y puntos de muestreo se eligen tal que: <br>
+- <span class="arithmatex">\(x_k\)</span> corresponden a las <span class="arithmatex">\(N\)</span> raíces (ceros) de los polinomios de Legendre <span class="arithmatex">\(P_N(x)\)</span> de orden <span class="arithmatex">\(N\)</span>. <br>
+- <span class="arithmatex">\(\displaystyle w_k = \left[\frac{2}{1-x^2}\left(\frac{dP_N}{dx}\right)^{-2}\right]_{x={x_k}}\)</span>, con <span class="arithmatex">\(x_k\)</span> que cumple <span class="arithmatex">\(P_N(x_k)=0\)</span></p>
+<p>En este caso, el polinomio de Legendre se calcula de forma automática, así que solo es necesario llamar las funciones con los argumentos correctos.</p>
+<h2 id="obteniendo-los-puntos-de-colocacion-y-pesos"><strong>Obteniendo los puntos de colocación y pesos</strong></h2>
+<p>Se puede llamar la función <strong>gaussxw(N)</strong> de la siguiente forma:</p>
+<pre><code>#El argumento corresponde al valor de regiones.
+xw_N2 = gaussxw(2)
+xw_N3 = gaussxw(3)
+xw_N4 = gaussxw(4)
+xw_N7 = gaussxw(7)
+#Los resultados se guardan en las variables xw_NX.
+</code></pre>
+<p>El resultado obtenido sería un arreglo de datos con los valores para los <span class="arithmatex">\(x_k\)</span> y los <span class="arithmatex">\(w_k\)</span>.</p>
+<h2 id="escalado-de-puntos-de-muestreo-y-pesos"><strong>Escalado de puntos de muestreo y pesos</strong></h2>
+<p>Ahora, con los resultados obtenidos, se puede realizar el escalado en el intervalo <span class="arithmatex">\([1,3]\)</span>. Utilizando la función <strong>gaussxwab(a, b, x, w)</strong>:</p>
+<pre><code>#Los primeros dos argumentos corresponden a los límites de integración.
+#El tercer argumento corresponde a los puntos de colocación.
+#El cuarto argumento corresponde a los pesos.
+ab_N2 = gaussxwab(1, 3, xw_N2[0], xw_N2[1])
+ab_N3 = gaussxwab(1, 3, xw_N3[0], xw_N3[1])
+ab_N4 = gaussxwab(1, 3, xw_N4[0], xw_N4[1])
+ab_N7 = gaussxwab(1, 3, xw_N7[0], xw_N7[1])
+#Los resultados se guardan en las variables ab_NX.
+</code></pre>
+<h2 id="evaluacion-de-la-integral"><strong>Evaluación de la integral</strong></h2>
+<p>Solo queda evaluar la integral con la función <strong>legendre(x)</strong>, multiplicar el resultado con los pesos y sumar el resultado para cada valor de <span class="arithmatex">\(x_k\)</span>:</p>
+<pre><code># Las expresiones ab_NX[0] y ab_NX[1] representan los valores de los puntos de locación (&quot;x&quot;) y pesos (&quot;w&quot;) escalados, respectivamente.
+sum_N2 = np.sum(ab_N2[1] * legendre(ab_N2[0]))
+sum_N3 = np.sum(ab_N3[1] * legendre(ab_N3[0]))
+sum_N4 = np.sum(ab_N4[1] * legendre(ab_N4[0]))
+sum_N7 = np.sum(ab_N7[1] * legendre(ab_N7[0]))
+#Los resultados se guardan en las variables sum_NX.
+</code></pre>
+<p>De esta forma, se puede aproximar el resultado de la integral.</p>
 
 
 
@@ -340,6 +498,10 @@
     
     
       <script src="../assets/javascripts/bundle.5090c770.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
