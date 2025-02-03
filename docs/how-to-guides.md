@@ -1,1 +1,1 @@
-This part of the project documentation focuses on a **problem - oriented** approach.
+Esta parte de la documentación del proyecto se enfoca en un alcance de **resolución de problemas**.

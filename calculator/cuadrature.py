@@ -4,9 +4,9 @@ Este módulo permite al usuario realizar una aproximación de integrales mediant
 
 Este módulo contiene las siguientes funciones:
 
--`gaussxw(N)` - Retorna una tupla con los valores de los puntos de colocación y los pesos.
--`gaussxwab(a, b, x, w)` - Retorna los puntos de colocación y los pesos escalados al intervalo de integración de interés.
--`legendre(x)` - Retorna la evaluación de la integral para cada punto de colocación.
+* -`gaussxw(N)` - Retorna una tupla con los valores de los puntos de colocación y los pesos.
+* -`gaussxwab(a, b, x, w)` - Retorna los puntos de colocación y los pesos escalados al intervalo de integración de interés.
+* -`legendre(x)` - Retorna la evaluación de la integral para cada punto de colocación.
 """
 
 import numpy as np
@@ -68,7 +68,8 @@ def legendre(x):
   """Expresión de evaluación por cuadratura Gaussiana.
 
   Examples:
-    >>> legendre(
+    >>> legendre([2.57735027 2.57735027])
+    [299.12023873 299.12023873]
 
   Args:
     x (float): Arreglo de datos con los puntos de colocación.
@@ -78,43 +79,3 @@ def legendre(x):
 
   """
   return x**6 - x**2 * np.sin(2 * x)
-
-#Se calculan los "x" y "w" para cada valor de N.
-#Caso para $N=2$
-"""
-xw_N2 = gaussxw(2)
-
-#Luego para $N=3$
-xw_N3 = gaussxw(3)
-
-#Y finalmente para $N=4$
-xw_N4 = gaussxw(4)
-"""
-#Caso adicional para $N=7$
-xw_N7 = gaussxw(7)
-
-# Se calcula el escalado del intervalo de evaluación con los datos de "x" y "w" obtenidos anteriormente.
-#El resultado de "x" y "w" son tuplas. Las expresiones xw_NX[0] y xw_NX[1] representan los valores de los puntos de locación ("x") y pesos ("w"), respectivamente.
-"""
-ab_N2 = gaussxwab(1, 3, xw_N2[0], xw_N2[1])
-
-ab_N3 = gaussxwab(1, 3, xw_N3[0], xw_N3[1])
-
-ab_N4 = gaussxwab(1, 3, xw_N4[0], xw_N4[1])
-"""
-ab_N7 = gaussxwab(1, 3, xw_N7[0], xw_N7[1])
-
-# Aplicando la ecuación de Newton - Cotes.
-# Las expresiones ab_NX[0] y ab_NX[1] representan los valores de los puntos de locación ("x") y pesos ("w") escalados, respectivamente.
-"""
-sum_N2 = np.sum(ab_N2[1] * legendre(ab_N2[0]))
-print(sum_N2)
-
-sum_N3 = np.sum(ab_N3[1] * legendre(ab_N3[0]))
-print(sum_N3)
-
-sum_N4 = np.sum(ab_N4[1] * legendre(ab_N4[0]))
-print(sum_N4)
-"""
-sum_N7 = np.sum(ab_N7[1] * legendre(ab_N7[0]))
-print(sum_N7)

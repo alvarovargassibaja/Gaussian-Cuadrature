@@ -1,3 +1,3 @@
-This part of the project documentation focuses on a **information - oriented** approach.
+Esta parte de la documentación del proyecto se enfoca en un alcance de **orientación de información**.
 
 ::: calculator.cuadrature
